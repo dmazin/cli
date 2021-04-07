@@ -132,10 +132,7 @@ func watchRun(opts *WatchOptions) error {
 
 	annotationCache := map[int][]shared.Annotation{}
 
-	duration, err := time.ParseDuration(fmt.Sprintf("%ds", opts.Interval))
-	if err != nil {
-		return fmt.Errorf("could not parse interval: %w", err)
-	}
+	duration := time.Second * opts.Interval
 
 	for run.Status != shared.Completed {
 		run, err = renderRun(*opts, client, repo, run, prNumber, annotationCache)
